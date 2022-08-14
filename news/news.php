@@ -23,13 +23,14 @@
          } 
       echo json_encode($response);  
 
-   } else {  
+   } 
+   else {  
 
-      $response["status"] = array("code"=>400,"message"=>"Missing error");
-
-      echo json_encode($response);  
+      $response["status"] = array("code"=>204,"message"=>"No Data");
 
    }  
+
+   echo json_encode($response);    
 
    
 ?> 

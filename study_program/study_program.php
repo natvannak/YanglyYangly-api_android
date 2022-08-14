@@ -25,7 +25,7 @@
 
    } else {  
 
-      $response["status"] = array("code"=>400,"message"=>"No Data");
+      $response["status"] = array("code"=>204,"message"=>"No Data");
 
       echo json_encode($response);  
 

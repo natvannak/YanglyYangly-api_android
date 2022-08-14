@@ -6,7 +6,7 @@
    require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    
       // connecting to db  
       $db = new Database();  
-      $query = "SELECT * FROM tbl_academic_years";
+      $query = "SELECT * FROM tbl_academic_years ORDER BY academic_year DESC;";
       
 
       $result = mysqli_query($db->connect(),$query);  
@@ -25,7 +25,7 @@
 
       } else {  
 
-         $response["status"] = array("code"=>400,"message"=>"Missing error");
+         $response["status"] = array("code"=>204,"message"=>"No Data");
 
          echo json_encode($response);  
 

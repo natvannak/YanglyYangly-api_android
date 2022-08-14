@@ -19,16 +19,15 @@
          array_push($response["data"]['branch_detail'], $row);  
 
        
-      } else {  
+      }else {  
 
-         $response["status"] = array("code"=>400,"message"=>"No Data");
+         $response["status"] = array("code"=>204,"message"=>"No Data");
 
-      } 
-   }
-   else{
-      $response["status"] = array("code"=>400,"message"=>"Empty ID");
-   }
-     
-   echo json_encode($response) 
+      }  
+
+   } else{
+      $response["status"] = array("code"=>400,"message"=>"Undefined array key");
+   } 
+   echo json_encode($response); 
   
 ?> 
