@@ -6,7 +6,7 @@
    require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    
       // connecting to db  
    $db = new Database();  
-   $query = "SELECT * FROM tbl_attendances
+   $query = "SELECT subject_kh, is_late, is_permission, is_absence FROM tbl_attendances
    INNER JOIN tbl_subjects ON tbl_subjects.id=tbl_attendances.subject";
 
    $result = mysqli_query($db->connect(),$query);  
