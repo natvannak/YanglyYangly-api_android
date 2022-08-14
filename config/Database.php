@@ -1,7 +1,7 @@
 
 <?php  
  define('DB_USER', "root");  
- define('DB_PASSWORD', "root"); 
+ define('DB_PASSWORD', ""); 
  define('DB_DATABASE', "fbis"); 
  define('DB_SERVER', "localhost");
 class Database {   
