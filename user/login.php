@@ -3,39 +3,43 @@
    header("Content-Type: application/json; charset=UTF-8");
    
    $response = array();  
-   if (isset($_POST['username']) && isset($_POST['password'])) {  
-      $username = $_POST['username'];  
-      $pass = $_POST['password'];  
-
-      require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
-      // connecting to db  
+   if(isset($_POST['usernmae']) || isset($_POST['password'])){
+      require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';  
       $db = new Database();  
-    $query = "SELECT * FROM tbl_student_user WHERE username = '$username' and password = '$pass'";
-      // $query = "SELECT * FROM tbl_student_user";
+      $conn = $db->connect();
+      $username = mysqli_real_escape_string( $conn, trim( $_POST['username'] ) ); 
+      $pass = mysqli_real_escape_string( $conn, trim( $_POST['password'] ) );; 
 
-      $result = mysqli_query($db->connect(),$query);  
-      
-      if (mysqli_num_rows($result) > 0) {  
- 
-         $response["status"] = array("code"=>200,"message"=>"success");
-         $response["data"] = array();  
-         $response["data"]['user'] = array();
-
+      if( $username == '' || $pass == '' ){
+         $response["status"] = array("code"=>400,"message"=>"Student ID & Password aren't empty!");
+      }else{
+       
+         $query = "SELECT * FROM tbl_student_user WHERE username = '".$username."' AND password = '".$pass."'";
          
-         while ($row = mysqli_fetch_assoc($result)) {
+         $result = mysqli_query($conn,$query);  
+         
+         if (mysqli_num_rows($result) > 0) {  
+   
+            $response["status"] = array("code"=>200,"message"=>"success");
+            $response["data"] = array();  
+            $response["data"]['user'] = array();
+            $row = mysqli_fetch_assoc($result);
             array_push($response["data"]['user'], $row);  
+         
+
+         } else {  
+
+            $response["status"] = array("code"=>204,"message"=>"Invalid login, please try again");
+
          } 
+         
+      }
+      $db->close(); 
 
-
-         echo json_encode($response);  
-
-      } else {  
-
-         $response["status"] = array("code"=>400,"message"=>"Missing password");
-
-         echo json_encode($response);  
-
-      }  
-
-   }  
+   }
+   else {  
+      $response["status"] = array("code"=>400,"message"=>"REQUEST_METHOD POST, Username,Password!");
+   }
+   echo json_encode($response); 
 ?> 
+
