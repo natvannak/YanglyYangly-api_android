@@ -3,7 +3,7 @@
    header("Content-Type: application/json; charset=UTF-8");
    
    $response = array();  
-   if(isset($_POST['usernmae']) || isset($_POST['password'])){
+   if(isset($_POST['username']) && isset($_POST['password'])){
       require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';  
       $db = new Database();  
       $conn = $db->connect();
@@ -11,10 +11,10 @@
       $pass = mysqli_real_escape_string( $conn, trim( $_POST['password'] ) );; 
 
       if( $username == '' || $pass == '' ){
-         $response["status"] = array("code"=>400,"message"=>"Student ID & Password aren't empty!");
+         $response["status"] = array("code"=>400,"message"=>"Phone Number & Password aren't empty!");
       }else{
        
-         $query = "SELECT * FROM tbl_student_user WHERE username = '".$username."' AND password = '".$pass."'";
+         $query = "SELECT * FROM tbl_parents_user WHERE username = '".$username."' AND password = '".$pass."'";
          
          $result = mysqli_query($conn,$query);  
          
