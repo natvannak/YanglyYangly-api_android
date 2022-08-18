@@ -3,15 +3,24 @@
    header("Content-Type: application/json; charset=UTF-8");
    
    $response = array();  
-   if (isset($_POST['study_hour'])) {  
-      $hour = $_POST['study_hour']; 
+   if (isset($_POST['academic_year']) && isset($_POST['month']) && isset($_POST['stu_id'])) {  
+      $academic = $_POST['academic_year']; 
+      $month = $_POST['month']; 
+      $stu_id = $_POST['stu_id']; 
 
 
       require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
       // connecting to db  
       $db = new Database();  
       // $query = "SELECT study_hour FROM tbl_schedule_details 
-      $query = "SELECT tbl_schedule_details.id, tbl_study_hours.hour_start, tbl_subjects.subject_kh, tbl_teachers.name_kh  FROM tbl_schedule_details 
+      /*$query = "SELECT tbl_schedule_details.id, tbl_study_hours.hour_start, tbl_subjects.subject_kh,tbl_teachers.name_kh  
+      FROM tbl_schedule_details 
+      INNER JOIN tbl_subjects ON tbl_subjects.id=tbl_schedule_details.subject 
+      INNER JOIN tbl_teachers ON tbl_teachers.id=tbl_schedule_details.teacher
+      INNER JOIN tbl_study_hours ON tbl_study_hours.id=tbl_schedule_details.study_hour"; 
+*/
+      $query = "SELECT *  
+      FROM tbl_schedule_details 
       INNER JOIN tbl_subjects ON tbl_subjects.id=tbl_schedule_details.subject 
       INNER JOIN tbl_teachers ON tbl_teachers.id=tbl_schedule_details.teacher
       INNER JOIN tbl_study_hours ON tbl_study_hours.id=tbl_schedule_details.study_hour"; 
