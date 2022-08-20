@@ -2,9 +2,8 @@
    header("Access-Control-Allow-Origin: *");
    header("Content-Type: application/json; charset=UTF-8");
    $response = array();
-   if (isset($_POST['academic_year']) && isset($_POST['stu_id'])) {  
-      $academic = $_POST['academic_year']; 
-      $stu_id = $_POST['stu_id']; 
+   if (isset($_POST['parents_id'])) {  
+      $parents_id = $_POST['parents_id']; 
 
    require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    
       // connecting to db  
