@@ -10,9 +10,9 @@
       // connecting to db  
    $db = new Database();
 
-   $query = "SELECT tbl_students.img_path, tbl_students.name_kh, tbl_class_type.name_kh as group_kh FROM tbl_student_parents
+   $query = "SELECT tbl_students.img_path, tbl_students.name_kh, tbl_groups.group_name_kh FROM tbl_student_parents
     INNER JOIN tbl_students ON tbl_students.id=tbl_student_parents.stu_id
-    INNER JOIN tbl_class_type ON tbl_class_type.id=tbl_student_parents.stu_id 
+    INNER JOIN tbl_groups ON tbl_groups.id=tbl_student_parents.stu_id 
       WHERE tbl_student_parents.stu_id= 1 and tbl_students.status = 1 AND tbl_student_parents.parents_id =1";
 
 
