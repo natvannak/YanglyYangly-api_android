@@ -15,7 +15,8 @@
    INNER JOIN tbl_subjects ON tbl_subjects.id=tbl_attendances.subject";
    */
 
-   $query = "SELECT tbl_subjects.subject_en, tbl_attendances.is_absence, tbl_attendances.is_permission, tbl_attendances.is_late FROM tbl_attendances
+   $query = "SELECT tbl_subjects.subject_kh, tbl_attendances.is_absence, tbl_attendances.is_permission, tbl_attendances.is_late 
+   FROM tbl_attendances
    INNER JOIN tbl_subjects ON tbl_subjects.id=tbl_attendances.subject
    WHERE MONTH(tbl_attendances.date) = ".$month;
 
@@ -34,16 +35,17 @@
       while ($row = mysqli_fetch_assoc($result)) {
          array_push($response["data"]['attendances'], $row);  
       }  
-      echo json_encode($response);  
-
+     
    } else {  
 
       $response["status"] = array("code"=>204,"message"=>"No Data");
 
-      echo json_encode($response);  
-
    }  
+}else{
+   
+   $response["status"] = array("code"=>400,"message"=>"Field Requirements");
+   
 }
-
+echo json_encode($response);  
  
 ?>
