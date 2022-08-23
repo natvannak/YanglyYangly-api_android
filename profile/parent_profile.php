@@ -3,15 +3,11 @@
    header("Content-Type: application/json; charset=UTF-8");
    
    $response = array();  
-   if (isset($_POST['id'])) {  
-      $hour = $_POST['id']; 
-
-
+   if (isset($_GET['id'])) {  
       require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
-      // connecting to db  
+
       $db = new Database();  
-      $query = "SELECT id, img_path, name_kh, name_en, phone from tbl_parents_user";
-      
+      $query = "SELECT id, img_path, name_kh, name_en, phone from tbl_parents_user WHERE id = ".$_GET['id'];      
 
       $result = mysqli_query($db->connect(),$query);  
       
@@ -21,19 +17,16 @@
          $response["data"] = array();  
          $response["data"]['profile'] = array();
 
-         
-          while ($row = mysqli_fetch_assoc($result)) {
-             array_push($response["data"]['profile'], $row);  
-          } 
-         echo json_encode($response);  
+         array_push($response["data"]['profile'], mysqli_fetch_assoc($result));           
 
       } else {  
 
-         $response["status"] = array("code"=>400,"message"=>"Missing error");
-
-         echo json_encode($response);  
-
+         $response["status"] = array("code"=>204,"message"=>"NOT FOUND");
       }  
-
-   }  
+      
+   } 
+   else{
+      $response["status"] = array("code"=>400,"message"=>"Empty ID");
+   } 
+   echo json_encode($response); 
 ?> 

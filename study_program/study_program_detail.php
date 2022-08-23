@@ -8,7 +8,7 @@
       
       require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php'; 
       $db = new Database();  
-      $query = "SELECT * FROM tbl_study_program_detail WHERE study_program_id = " . $_GET['id'];
+      $query = "SELECT level_kh, description FROM tbl_education_levels WHERE study_program = " . $_GET['id'];
       
    
       $result = mysqli_query($db->connect(),$query);  
@@ -18,10 +18,10 @@
    
          $response["status"] = array("code"=>200,"message"=>"success");
          $response["data"] = array();  
-         $response["data"]['study_programs_detail'] = array();
+         $response["data"]['education_levels'] = array();
    
          while ($row = mysqli_fetch_assoc($result)) {
-            array_push($response["data"]['study_programs_detail'], $row);  
+            array_push($response["data"]['education_levels'], $row);  
          }
          
    
