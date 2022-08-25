@@ -8,9 +8,10 @@
       // connecting to db  
    $db = new Database();
 
-   $query = "SELECT tbl_staffs.id, tbl_staffs.name_kh, tbl_staffs.phone, tbl_staffs.telegram, tbl_staff_job_pos.position FROM tbl_staffs
+   $query = "SELECT tbl_staffs.id, tbl_staffs.name_kh, tbl_staffs.phone, tbl_staffs.telegram, tbl_job_position.position_kh FROM tbl_staffs
    INNER JOIN tbl_staff_job_pos ON tbl_staff_job_pos.id=tbl_staffs.staff_id
-   INNER JOIN tbl_students ON tbl_students.id=tbl_staffs.staff_id";
+   INNER JOIN tbl_students ON tbl_students.id=tbl_staffs.staff_id
+    INNER JOIN tbl_job_position ON tbl_job_position.id=tbl_staffs.staff_id";
 
    $result = mysqli_query($db->connect(),$query);  
    
