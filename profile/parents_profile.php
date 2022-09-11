@@ -7,7 +7,7 @@
       require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
 
       $db = new Database();  
-      $query = "SELECT id, img_path, name_kh, name_en, phone from tbl_parents_user WHERE id = ".$_GET['id'];      
+      $query = "SELECT username, img_path, name_kh, name_en, phone from tbl_parents_user WHERE id = ".$_GET['id'];      
 
       $result = mysqli_query($db->connect(),$query);  
       
@@ -15,9 +15,9 @@
  
          $response["status"] = array("code"=>200,"message"=>"success");
          $response["data"] = array();  
-         $response["data"]['profile'] = array();
+         $response["data"]['parents_profile'] = array();
 
-         array_push($response["data"]['profile'], mysqli_fetch_assoc($result));           
+         array_push($response["data"]['parents_profile'], mysqli_fetch_assoc($result));           
 
       } else {  
 
