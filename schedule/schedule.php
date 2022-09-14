@@ -36,7 +36,7 @@
 
       } else {  
 
-         $response["status"] = array("code"=>400,"message"=>"Missing error");
+         $response["status"] = array("code"=>204,"message"=>"No Data");
       }  
 
    }  

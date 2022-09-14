@@ -2,10 +2,10 @@
    header("Access-Control-Allow-Origin: *");
    header("Content-Type: application/json; charset=UTF-8");
    $response = array();
-   if (isset($_POST['academic_year']) && isset($_POST['month']) && isset($_POST['stu_id'])) {  
-      $academic = $_POST['academic_year']; 
-      $month = $_POST['month']; 
-      $stu_id = $_POST['stu_id']; 
+   if (isset($_GET['academic_year']) && isset($_GET['month']) && isset($_GET['stu_id'])) {  
+      $academic = $_GET['academic_year']; 
+      $month = $_GET['month']; 
+      $stu_id = $_GET['stu_id']; 
 
    require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    
       // connecting to db  
@@ -20,9 +20,9 @@
    INNER JOIN tbl_subjects ON tbl_subjects.id=tbl_attendances.subject
    WHERE MONTH(tbl_attendances.date) = ".$month;
 
-   $query .= " and tbl_attendances.id_student = ".$stu_id;
+   $query .= " AND tbl_attendances.id_student = ".$stu_id;
 
-   $query .= " and tbl_attendances.acad_year = ".$academic;
+   $query .= " AND tbl_attendances.acad_year = ".$academic;
 
    $result = mysqli_query($db->connect(),$query);  
    

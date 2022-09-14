@@ -6,7 +6,7 @@
    require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    
       // connecting to db  
       $db = new Database();  
-      $query = "SELECT * FROM tbl_academic_years ORDER BY academic_year DESC;";
+      $query = "SELECT id,academic_year,is_selected FROM tbl_academic_years ORDER BY sort ASC;";
       
 
       $result = mysqli_query($db->connect(),$query);  
