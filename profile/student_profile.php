@@ -8,15 +8,7 @@
       require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
       // connecting to db  
       $db = new Database();  
-      $query = "SELECT tbl_students.name_kh, CONCAT (tbl_grade_levels.grade_kh,' ', tbl_groups.group_name_kh) as grade , 
-      tbl_students.img_path, tbl_rooms.room_kh, tbl_students.phone , tbl_students.student_id , tbl_students.address 
-      FROM tbl_study_records
-      INNER JOIN tbl_students ON tbl_study_records.id_student = tbl_students.id
-      INNER JOIN tbl_groups ON tbl_study_records.`group` = tbl_groups.id
-      INNER JOIN tbl_rooms ON tbl_rooms.id = tbl_groups.room
-      INNER JOIN tbl_grade_levels ON tbl_grade_levels.id = tbl_groups.grade
-      INNER JOIN tbl_academic_years ON tbl_academic_years.id = tbl_groups.acad_year
-      WHERE tbl_students.id = ".$_GET['id']." ORDER BY tbl_academic_years.is_selected DESC LIMIT 1";
+      $query = "CALL sp_student_by_id(".$_GET['id'].");";
       
 
       $result = mysqli_query($db->connect(),$query);  

@@ -11,18 +11,7 @@
       // connecting to db  
    $db = new Database();
 
-   /*$query = "SELECT subject_kh, is_late, is_permission, is_absence FROM tbl_attendances
-   INNER JOIN tbl_subjects ON tbl_subjects.id=tbl_attendances.subject";
-   */
-
-   $query = "SELECT tbl_subjects.subject_kh, tbl_attendances.is_absence, tbl_attendances.is_permission, tbl_attendances.is_late 
-   FROM tbl_attendances
-   INNER JOIN tbl_subjects ON tbl_subjects.id=tbl_attendances.subject
-   WHERE MONTH(tbl_attendances.date) = ".$month;
-
-   $query .= " AND tbl_attendances.id_student = ".$stu_id;
-
-   $query .= " AND tbl_attendances.acad_year = ".$academic;
+   $query = "CALL sp_attendances_by_id(".$academic.",".$month.",".$stu_id.")";
 
    $result = mysqli_query($db->connect(),$query);  
    
