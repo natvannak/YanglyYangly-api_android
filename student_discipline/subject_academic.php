@@ -3,17 +3,12 @@
    header("Content-Type: application/json; charset=UTF-8");
    
    $response = array();  
-   if (isset($_GET['stu_id']) && isset($_GET['acad_year']) && isset($_GET['subject'])) {  
+   if (isset($_GET['acad_year']) && isset($_GET['stu_id'])) {  
 
       require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
-      
+      // connecting to db  
       $db = new Database();  
-      $query = "SELECT * FROM vw_student_discipline_by_id ";
-      if ($_GET['subject'] == 0) {
-         $query .= "WHERE id_student = ".$_GET['stu_id']." AND acad_year = ".$_GET['acad_year']; 
-      }else {
-         $query .= "WHERE id_student = ".$_GET['stu_id']." AND acad_year = ".$_GET['acad_year']." AND subject_id = ".$_GET['subject'];
-      }
+      $query = "CALL sp_subject_by_academic(".$_GET['acad_year'].",".$_GET['stu_id'].")";
       
       $result = mysqli_query($db->connect(),$query);  
       
@@ -21,10 +16,10 @@
  
          $response["status"] = array("code"=>200,"message"=>"success");
          $response["data"] = array();  
-         $response["data"]['student_discipline'] = array();
+         $response["data"]['subjects'] = array();
          
          while ($row = mysqli_fetch_assoc($result)) {
-            array_push($response["data"]['student_discipline'], $row);  
+            array_push($response["data"]['subjects'], $row);  
          }  
 
       } else {  
@@ -34,7 +29,7 @@
       
    } 
    else{
-      $response["status"] = array("code"=>400,"message"=>"Field required");
+      $response["status"] = array("code"=>400,"message"=>"Empty ID");
    } 
    echo json_encode($response);  
 ?> 
