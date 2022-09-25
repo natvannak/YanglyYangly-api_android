@@ -11,17 +11,23 @@
 
     require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
     $db = new Database();  
-    $query = "SELECT * FROM vw_student_semester_result where student_id = $id AND acad_year_id = $acad AND semester = $semester";
+    $query = "SELECT * FROM vw_student_semester_exam_score where student_id = $id AND acad_year_id = $acad AND semester = $semester";
     $result = mysqli_query($db->connect(),$query);
     
-   
+    $query2 = "SELECT * FROM vw_student_semester_exam_result where student_id = $id AND acad_year_id = $acad AND semester = $semester";
+    $result2 = mysqli_query($db->connect(),$query2);    
       
     if (mysqli_num_rows($result) > 0 || mysqli_num_rows($result2) > 0) {  
         $response["status"] = array("code"=>200,"message"=>"success");
         $response["data"] = array();  
+        $response["data"]['semester_score'] = array();
         $response["data"]['semester_result'] = array();
 
         while ($row = mysqli_fetch_assoc($result)) {
+            array_push($response["data"]['semester_score'], $row);  
+        } 
+
+        while ($row = mysqli_fetch_assoc($result2)) {
             array_push($response["data"]['semester_result'], $row);  
         } 
 

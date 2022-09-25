@@ -6,9 +6,9 @@
    if (isset($_GET['acad_year']) && isset($_GET['stu_id'])) {  
 
       require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
-      // connecting to db  
+     
       $db = new Database();  
-      $query = "CALL sp_subject_by_academic(".$_GET['acad_year'].",".$_GET['stu_id'].")";
+      $query = "CALL sp_student_subject_by_discipline(".$_GET['acad_year'].",".$_GET['stu_id'].")";
       
       $result = mysqli_query($db->connect(),$query);  
       
