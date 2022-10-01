@@ -1,39 +1,33 @@
 <?php  
    header("Access-Control-Allow-Origin: *");
    header("Content-Type: application/json; charset=UTF-8");
-   $response = array();
-   if (isset($_GET['id'])) {   
-       
-   require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    
-      // connecting to db  
-   $db = new Database();
-
-   $query = "SELECT tbl_staffs.id, tbl_staffs.name_kh, tbl_staffs.phone, tbl_staffs.telegram, tbl_job_position.position_kh FROM tbl_staffs
-   INNER JOIN tbl_staff_job_pos ON tbl_staff_job_pos.id=tbl_staffs.staff_id
-   INNER JOIN tbl_students ON tbl_students.id=tbl_staffs.staff_id
-    INNER JOIN tbl_job_position ON tbl_job_position.id=tbl_staffs.staff_id";
-
-   $result = mysqli_query($db->connect(),$query);  
    
-   if (mysqli_num_rows($result) > 0) {  
+   $response = array();  
+   if (isset($_GET['stu_id'])) {  
 
-      $response["status"] = array("code"=>200,"message"=>"success");
-      $response["data"] = array();  
-      $response["data"]['contact_info'] = array();
+    $id = $_GET['stu_id'];
 
-      while ($row = mysqli_fetch_assoc($result)) {
-         array_push($response["data"]['contact_info'], $row);  
-      }  
-      echo json_encode($response);  
-
-   } else {  
+    require_once $_SERVER['DOCUMENT_ROOT']. '/api/config/Database.php';   
+    $db = new Database();  
+    $query = "CALL `sp_contact`($id);";
+    $result = mysqli_query($db->connect(),$query);
       
-      $response["status"] = array("code"=>204,"message"=>"No Data");
+    if (mysqli_num_rows($result) > 0 || mysqli_num_rows($result2) > 0) {  
+         $response["status"] = array("code"=>200,"message"=>"success");
+         $response["data"] = array();  
+         $response["data"]['contact_info'] = array();
 
-      echo json_encode($response);  
+         while ($row = mysqli_fetch_assoc($result)) {
+               array_push($response["data"]['contact_info'], $row);  
+         } 
 
-   }  
-}
-
- 
-?>
+    } else {  
+        $response["status"] = array("code"=>204,"message"=>"NOT DATA");
+    }  
+    
+   } 
+   else{
+      $response["status"] = array("code"=>400,"message"=>"Field required");
+   } 
+   echo json_encode($response);  
+?> 

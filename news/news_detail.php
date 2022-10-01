@@ -6,8 +6,7 @@
    if(isset($_GET['id'])){
       require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php'; 
       $db = new Database();  
-      $query = "SELECT * from tbl_news where id = " . $_GET['id'];
-      
+      $query = "SELECT * from tbl_news where id = " . $_GET['id']; 
 
       $result = mysqli_query($db->connect(),$query);  
       
