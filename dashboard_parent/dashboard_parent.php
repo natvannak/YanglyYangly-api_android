@@ -7,7 +7,7 @@
       // connecting to db  
    $db = new Database();
 
-   $query = "SELECT tbl_student_parents.stu_id, tbl_students.img_path, tbl_students.name_kh, CONCAT (tbl_grade_levels.grade_kh,' ', tbl_groups.group_name_kh) as grade
+   $query = "SELECT tbl_student_parents.stu_id, tbl_students.img_path, tbl_students.name_kh,CONCAT ('ថ្នាក់ទី ', tbl_groups.group_name_kh) as grade
    FROM tbl_student_parents
    INNER JOIN tbl_students ON tbl_students.id=tbl_student_parents.stu_id
    INNER JOIN tbl_study_records ON tbl_study_records.id=tbl_student_parents.stu_id 
