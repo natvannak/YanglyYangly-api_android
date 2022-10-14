@@ -17,7 +17,7 @@
     $query2 = "SELECT * FROM vw_student_month_result where student_id = $id AND acad_year_id = $acad AND `month` = $month;";
     $result2 = mysqli_query($db->connect(),$query2);    
       
-    if (mysqli_num_rows($result) > 0 || mysqli_num_rows($result2) > 0) {  
+    if (mysqli_num_rows($result) > 0 && mysqli_num_rows($result2) > 0) {  
         $response["status"] = array("code"=>200,"message"=>"success");
         $response["data"] = array();  
         $response["data"]['month_score'] = array();

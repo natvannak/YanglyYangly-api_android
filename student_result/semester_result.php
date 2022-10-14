@@ -16,7 +16,7 @@
     
    
       
-    if (mysqli_num_rows($result) > 0 || mysqli_num_rows($result2) > 0) {  
+    if (mysqli_num_rows($result) > 0 ) {  
         $response["status"] = array("code"=>200,"message"=>"success");
         $response["data"] = array();  
         $response["data"]['semester_result'] = array();
