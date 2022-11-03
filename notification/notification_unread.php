@@ -14,7 +14,7 @@
       
       $result = mysqli_query($conn,$query);  
       
-      if ($result) {  
+      if (mysqli_num_rows($result) > 0) {  
 
          $response["status"] = array("code"=>200,"message"=>"success");
          $response["data"] = array();  

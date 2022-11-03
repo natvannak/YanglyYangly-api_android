@@ -1,7 +1,7 @@
 <?php  
    header("Access-Control-Allow-Origin: *");
    header("Content-Type: application/json; charset=UTF-8");
-   
+   date_default_timezone_set("Asia/Bangkok");
    $response = array();  
    $notitication_value = array();
    require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    

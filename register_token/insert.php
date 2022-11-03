@@ -1,7 +1,7 @@
 <?php  
    header("Access-Control-Allow-Origin: *");
    header("Content-Type: application/json; charset=UTF-8");
-   
+   date_default_timezone_set("Asia/Bangkok");
    $response = array();  
    // $notitication_value = array();
    if (isset($_POST['device_token'])) { 
@@ -10,10 +10,10 @@
     $db = new Database();  
     $conn = $db->connect();
     $device_token = mysqli_real_escape_string($conn,$_POST['device_token']);
-
+    $createdate = date('Y-m-d H:i:s'); 
     
 
-    $query = "INSERT INTO `tbl_registered_device_token`(`device_token`) VALUES ('$device_token');";
+    $query = "INSERT INTO `tbl_registered_device_token`(`device_token`,`create_date`) VALUES ('$device_token','$createdate');";
     
     $result = mysqli_query($conn,$query);  
     

@@ -6,7 +6,7 @@
    require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';  
 
    $db = new Database();  
-   $query = "SELECT n.*, t.title as title_type from tbl_news as n inner join tbl_type_news as t on t.id = n.type_id";
+   $query = "SELECT n.*, t.title as title_type from tbl_news as n inner join tbl_type_news as t on t.id = n.type_id ORDER BY n.id DESC";
    
 
    $result = mysqli_query($db->connect(),$query);  
