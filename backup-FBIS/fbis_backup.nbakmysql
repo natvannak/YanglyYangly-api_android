@@ -1,0 +1,49 @@
+{
+    "Version": 1.0,
+    "General": {
+        "Project": "",
+        "ProjectOwnerNavicatID": "",
+        "Server": "MySQL",
+        "Host": "localhost",
+        "Catalog": "",
+        "Schema": "fbis",
+        "Comment": "",
+        "ServerType": "MYSQL",
+        "SpecifiedFileName": "",
+        "IsLockTable": false,
+        "UseSingleTransaction": false,
+        "UseSpecifiedFileName": false
+    },
+    "Tables": {
+        "SelectAll": true,
+        "Selected": []
+    },
+    "Views": {
+        "SelectAll": true,
+        "Selected": []
+    },
+    "Functions": {
+        "SelectAll": true,
+        "Selected": []
+    },
+    "Events": {
+        "SelectAll": true,
+        "Selected": []
+    },
+    "Sequences": {
+        "SelectAll": true,
+        "Selected": []
+    },
+    "Types": {
+        "SelectAll": true,
+        "Selected": []
+    },
+    "Indexes": {
+        "SelectAll": true,
+        "Selected": []
+    },
+    "Triggers": {
+        "SelectAll": true,
+        "Selected": []
+    }
+}
