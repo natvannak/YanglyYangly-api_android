@@ -6,14 +6,13 @@
    if (isset($_GET['month'])) {  
       $month = $_GET['month'];   
 
-
       require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    
       // connecting to db  
       $db = new Database();  
       if ($month==0) {
-         $query = "SELECT * FROM tbl_holiday";
+         $query = 'SELECT DATE_FORMAT(date,"%d %b %Y") as date , description FROM tbl_holiday';
       }else {
-         $query = "SELECT * FROM tbl_holiday WHERE MONTH(date) = ".$month;
+         $query = 'SELECT DATE_FORMAT(date,"%d %b %Y") as date , description FROM tbl_holiday WHERE MONTH(date) ='.$month;
       }
        
       $result = mysqli_query($db->connect(),$query);  
