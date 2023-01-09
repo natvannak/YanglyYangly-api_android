@@ -2,27 +2,15 @@
    header("Access-Control-Allow-Origin: *");
    header("Content-Type: application/json; charset=UTF-8");
    $response = array();
-   if (isset($_GET['academic_year']) && isset($_GET['month']) && isset($_GET['stu_id'])) {  
+   if (isset($_GET['academic_year']) && isset($_GET['stu_id'])) {  
       $academic = $_GET['academic_year']; 
-      $month = $_GET['month']; 
       $stu_id = $_GET['stu_id']; 
 
    require_once $_SERVER['DOCUMENT_ROOT']. '/api_android/config/Database.php';    
       // connecting to db  
    $db = new Database();
 
-   if ($month==13) {
-      $query = "CALL sp_attendances_semester1_by_id(".$academic.",".$stu_id.")";
-   }else if ($month==14) {
-      $query = "CALL sp_attendances_semester2_by_id(".$academic.",".$stu_id.")";
-   }
-   else if ($month==15) {
-      $query = "CALL sp_attendances_yearly_by_id(".$academic.",".$stu_id.")";
-   } else {
-      $query = "CALL sp_attendances_by_id(".$academic.",".$month.",".$stu_id.")";
-   }
-   
-   
+   $query = "CALL sp_attendances_semester2_by_id(".$academic.",".$stu_id.")";
 
    $result = mysqli_query($db->connect(),$query);  
    

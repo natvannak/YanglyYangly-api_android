@@ -12,7 +12,7 @@
       if ($_GET['subject'] == 0) {
          $query .= "WHERE id_student = ".$_GET['stu_id']." AND acad_year = ".$_GET['acad_year']; 
       }else {
-         $query .= "WHERE id_student = ".$_GET['stu_id']." AND acad_year = ".$_GET['acad_year']." AND subject_id = ".$_GET['subject'];
+         $query .= "WHERE id_student = ".$_GET['stu_id']." AND acad_year = ".$_GET['acad_year']." AND `subject` = ".$_GET['subject'];
       }
       
       $result = mysqli_query($db->connect(),$query);  
