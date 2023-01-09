@@ -14,7 +14,7 @@
          $response["status"] = array("code"=>400,"message"=>"Student ID & Password aren't empty!");
       }else{
        
-         $query = "SELECT * FROM tbl_student_user WHERE username = '".$username."' AND password = '".$pass."'";
+         $query = "SELECT * FROM tbl_student_user WHERE username = '".$username."' AND password = '".md5($pass)."'";
          
          $result = mysqli_query($conn,$query);  
          
